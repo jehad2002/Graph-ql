@@ -375,38 +375,13 @@ function createSkillChart(skillTransactions) {
 
     group.appendChild(path);
 
-    const textX = (startX + endX) / 2;
-    const textY = (startY + endY) / 2;
-
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", textX);
-    text.setAttribute("y", textY);
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("alignment-baseline", "middle");
-    text.textContent = `${percentage}%`;
-
-    group.appendChild(text);
-
-    const legendItem = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    legendItem.setAttribute("x", newWidth - 30);
-    legendItem.setAttribute("y", startAngle + 20);
-    legendItem.setAttribute("text-anchor", "start");
-    legendItem.setAttribute("fill", colors[relevantSkills.indexOf(skill)]);
-    legendItem.textContent = `${skill} (${percentage}%)`;
-
-    // Add event listeners to show skill name on hover in the legend
-    legendItem.addEventListener('mouseenter', () => showSkillName(skill, percentage));
-    legendItem.addEventListener('mouseleave', hideSkillName);
-
-    legendGroup.appendChild(legendItem);
-
     startAngle = endAngle;
   });
 
   function showSkillName(skill, percentage) {
     const skillName = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    skillName.setAttribute("x", newWidth / 2);
-    skillName.setAttribute("y", newHeight - 20);
+    skillName.setAttribute("x", newWidth / 2); // Center horizontally
+    skillName.setAttribute("y", newHeight - 5); // Move it below the chart
     skillName.setAttribute("text-anchor", "middle");
     skillName.setAttribute("fill", "black");
     skillName.setAttribute("font-size", "20");
